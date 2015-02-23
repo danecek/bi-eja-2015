@@ -33,18 +33,23 @@ public class FrontController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String namePar = request.getParameter("name");
-        String agePar = request.getParameter("age");
-        CustomerValidator cv = new CustomerValidator(namePar, agePar);
-        if (cv.validate()) {
-            CustomerDB customerDB = (CustomerDB) this.getServletContext().getAttribute("customerDB");
-            customerDB.addCustomer(cv.getName(), cv.getAge());
-            response.sendRedirect("Customers.jsp");
+        String path = request.getServletPath();
+        if ("/addCustomer.do".equals(path)) {
+            String namePar = request.getParameter("name");
+            String agePar = request.getParameter("age");
+            CustomerValidator cv = new CustomerValidator(namePar, agePar);
+            if (cv.validate()) {
+                CustomerDB customerDB = (CustomerDB) this.getServletContext().getAttribute("customerDB");
+                customerDB.addCustomer(cv.getName(), cv.getAge());
+                response.sendRedirect("Customers.jsp");
+            } else {
+                request.setAttribute("validator", cv);
+                RequestDispatcher dsp = request.getRequestDispatcher("AddCustomer.jsp");
+                dsp.forward(request, response);
+            }
         } else {
-            request.setAttribute("validator", cv);
-            RequestDispatcher dsp = request.getRequestDispatcher("AddCustomer.jsp");
-            dsp.forward(request, response);
+            this.log(path);
+            throw new ServletException(path);
         }
     }
 
