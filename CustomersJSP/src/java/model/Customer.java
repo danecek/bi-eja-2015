@@ -10,6 +10,7 @@ package model;
  * @author danecek
  */
 public class Customer {
+
     private int id;
     private String name;
     private int age;
@@ -19,7 +20,6 @@ public class Customer {
         this.name = name;
         this.age = age;
     }
-
 
     /**
      * @return the id
@@ -41,5 +41,5 @@ public class Customer {
     public int getAge() {
         return age;
     }
-    
+
 }
