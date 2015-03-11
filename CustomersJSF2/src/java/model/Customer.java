@@ -15,19 +15,16 @@ public class Customer {
     private String name;
     private String email;
     private int age;
+    private Group group;
 
-    public Customer(int id, String name, String email, int age) {
+    public Customer(int id, String name, String email, int age, Group group) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.age = age;
+        this.group = group;
     }
 
-
-
-    /**
-     * @return the id
-     */
     public int getId() {
         return id;
     }
@@ -79,6 +76,20 @@ public class Customer {
      */
     public void setAge(int age) {
         this.age = age;
+    }
+
+    /**
+     * @return the group
+     */
+    public Group getGroup() {
+        return group;
+    }
+
+    /**
+     * @param group the group to set
+     */
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
 }

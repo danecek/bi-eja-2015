@@ -29,8 +29,12 @@ a:link:hover, a:visited:hover  {
 }
 
 .oddRow {
-    background-color: activeborder  
+    background-color: lightyellow  
 }
 .evenRow {
-    background-color: #ece3a5
+    background-color: lightblue
+}
+
+.error {
+    color: red
 }

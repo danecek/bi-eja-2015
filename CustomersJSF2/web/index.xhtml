@@ -11,29 +11,38 @@
     <h:body>
         <ui:composition template="customersTemplate.xhtml" >
             <ui:define name="top">
-                <ez:title text="Customers"/>
+                <ez:title text="#{bundle.Customers}"/>
             </ui:define>
             <ui:define name="content" >
                 <h:dataTable value="#{customerDB.customers}" var="customer" border="1"
                              rowClasses="oddRow,evenRow" first="#{indexBean.beginIndex}" rows="#{indexBean.rowsNum}" >
-                    <f:facet name="caption">Customers table</f:facet>
+                    <f:facet name="caption">#{bundle.Customerstable}</f:facet>
                     <h:column>
-                        <f:facet name="header">Id</f:facet>
+                        <f:facet name="header">#{bundle.Id}</f:facet>
                             #{customer.id}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Name</f:facet>
+                        <f:facet name="header">#{bundle.Name}</f:facet>
                             #{customer.name}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Age</f:facet>
+                        <f:facet name="header">#{bundle.Email}</f:facet>
+                            #{customer.email}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">#{bundle.Age}</f:facet>
                             #{customer.age}
                     </h:column>
                     <h:column>
-                        <h:link outcome="deletecustomer" value="Delete">
+                        <f:facet name="header">#{bundle.Group}</f:facet>
+                            #{customer.group.name}
+                    </h:column>
+                    <h:column>
+                        <h:link outcome="deletecustomer" value="#{bundle.Delete}">
                             <f:param name="id" value="#{customer.id}"/>
                         </h:link>
                     </h:column>
+
                     <f:facet name="footer">
                         <h:form>
                             <h:panelGrid columns="4">
@@ -43,7 +52,6 @@
                                 <h:commandButton value=">>" action="#{indexBean.end()}" />
                             </h:panelGrid>
                         </h:form>
-
                     </f:facet>
                 </h:dataTable>
             </ui:define>

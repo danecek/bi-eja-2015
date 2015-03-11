@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import model.CustomerDB;
+import model.Group;
 
 /**
  *
@@ -21,6 +22,7 @@ public class AddCustomerBean {
     private String name;
     private String email;
     private int age;
+    private int groupId;
     @ManagedProperty(value = "#{applicationScope.customerDB}")
     private CustomerDB customerDB;
 
@@ -58,8 +60,8 @@ public class AddCustomerBean {
         this.age = age;
     }
 
-    public String submit() {
-        getCustomerDB().addCustomer(getName(), getEmail(), getAge());
+    public String submit() {        
+        getCustomerDB().addCustomer(getName(), getEmail(), getAge(), getGroupId());
         return "index?faces-redirect=true";
     }
 
@@ -89,6 +91,20 @@ public class AddCustomerBean {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+     /**
+     * @return the groupId
+     */
+    public int getGroupId() {
+        return groupId;
+    }
+
+    /**
+     * @param groupId the groupId to set
+     */
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
 }

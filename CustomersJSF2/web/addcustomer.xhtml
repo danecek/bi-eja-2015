@@ -15,32 +15,44 @@
             <ui:define name="content">
                 <h:form>
                     <h:panelGrid columns="3">
-
-                        <h:outputLabel for="name" value="Name:" />
+                        <h:outputLabel for="name" value="#{bundle.Name}:" />
                         <h:inputText id="name" value="#{addCustomerBean.name}" required="true"
-                                     requiredMessage="Is empty"/>
-                        <h:message for="name" />
-                        
-                        <h:outputLabel for="email" value="Email:" />
-                        <h:inputText id="email" value="#{addCustomerBean.email}" required="true"
-                                     requiredMessage="Is empty" validator="emailValidator">
-                            <f:ajax  execute="@this" render="emailerror"/>
+                                     requiredMessage="#{bundle.Required}" validatorMessage="dddddddddddddd">
+                            <f:ajax  event="keyup" render="nameerror"/>
                         </h:inputText>
-                        <h:message id="emailerror" for="email" />
 
-                        <h:outputLabel for="age" value="Age:" />
+                        <h:message id="nameerror" for="name" styleClass="error"/>
+
+                        <h:outputLabel for="email" value="#{bundle.Email}:" />
+                        <h:inputText id="email" value="#{addCustomerBean.email}"
+                                     required="true" validatorMessage="#{bundle.Invalidemail}"
+                                     requiredMessage="#{bundle.Required}" validator="emailValidator">
+                            <f:ajax  event="keyup" render="emailerror"/>
+                        </h:inputText>
+                        <h:message id="emailerror" for="email" styleClass="error"/>
+
+                        <h:outputLabel for="age" value="#{bundle.Age}:" />
                         <h:inputText id="age" value="#{addCustomerBean.age}" 
-                                     converterMessage="#{bundle.invalidage}" required="true" requiredMessage="Is empty"
+                                     converterMessage="#{bundle.invalidage}" required="true"
+                                     requiredMessage="#{bundle.Required}"
                                      validatorMessage="#{bundle.ageoutofrange}">
-                           <f:validateLongRange minimum="1" maximum="120"/>
+                            <f:validateLongRange minimum="1" maximum="120"/>
+                            <f:ajax   event="keyup" render="ageerror"/>
                         </h:inputText>
-                        <h:message for="age" />
+                        <h:message id="ageerror" for="age" styleClass="error"/>
+                        <h:selectOneMenu value="#{addCustomerBean.groupId}" required="true"
+                                         validatorMessage="sssss" requiredMessage="eee">
+                            <f:selectItems value="#{customerDB.groups}" var="group" itemLabel="#{group.name}" 
+                                            itemValue="#{group.id}"/>
+                        </h:selectOneMenu>
                     </h:panelGrid>
-
-                    <h:commandLink action="#{addCustomerBean.submit}" value="Add Customer"/>
+                    <h:panelGrid columns="2">                    
+                        <h:commandButton action="#{addCustomerBean.submit}" value="#{bundle.Addcustomer}"/>
+                        <h:button outcome ="index" value="#{bundle.Cancel}" />
+                    </h:panelGrid>
                 </h:form>
             </ui:define>
         </ui:composition>
     </h:body>
-</html>
+</html>                    <!-- itemLabel="#{group.name}" itemValue="#{group.id}"-->
 

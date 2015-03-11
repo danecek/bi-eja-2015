@@ -5,11 +5,14 @@
  */
 package view;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import model.Customer;
 import model.CustomerDB;
 
 /**
@@ -88,8 +91,21 @@ public class IndexBean {
     public void setCustomerDB(CustomerDB customerDB) {
         this.customerDB = customerDB;
     }
-    
-//    public void setLocale(Locale locale) {
-//        FacesContext.getCurrentInstance().getViewRoot().setLocale(Locale.locale);
-//    }
+
+    public Collection<Integer> getGroupValues() {
+        Collection<Integer> groupValues = new ArrayList<>();
+        customerDB.getCustomers().stream().forEach((c) -> {
+            groupValues.add(c.getId());
+        });
+        return groupValues;
+    }
+
+    public Collection<String> getGroupLabels() {
+        Collection<String> groupValues = new ArrayList<>();
+        customerDB.getCustomers().stream().forEach((c) -> {
+            groupValues.add(c.getGroup().toString());
+        });
+        return groupValues;
+    }
+
 }
