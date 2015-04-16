@@ -34,12 +34,12 @@ public class CustomersDAOMock implements CustomersDAOInterface {
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        customersDB.delete(id);
     }
 
     @Override
     public Customer find(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return customersDB.find(id);
     }
 
 }
